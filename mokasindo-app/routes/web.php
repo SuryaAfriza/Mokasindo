@@ -3,12 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CompanyController;
-<<<<<<< HEAD
 use App\Http\Controllers\InstagramController;
-=======
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\WishlistController;
->>>>>>> 566bf0651e64fca396a13e6e51f6e9d4cb5f71e5
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -59,17 +56,15 @@ Route::controller(CompanyController::class)->group(function () {
         $page = Page::findBySlug('cookie-policy');
         return view('pages.company.generic', compact('page'));
     })->name('company.cookie_policy');
-
 });
 
-<<<<<<< HEAD
+// Instagram feed (example)
 Route::get('/instagram-feed', [InstagramController::class, 'getMedia']);
-=======
+
 // ====================================================
 // 4. HELPER TESTING (Force Login)
 // ====================================================
 // Jalankan URL ini sekali di browser agar kamu login otomatis sebagai ID 1 (http://mokasindo.test/force-login)
-
 Route::get('/force-login', function () {
     $user = \App\Models\User::find(1);
     
@@ -87,38 +82,34 @@ Route::get('/force-login', function () {
     
     return "<h1>Berhasil Login!</h1> <p>Login sebagai: <b>" . $user->name . "</b></p><p>Silakan akses <a href='/wishlists'>/wishlists</a> atau <a href='/etalase/vehicles'>/etalase/vehicles</a></p>";
 });
-<<<<<<< HEAD
 
 // Tampilkan form register perusahaan
 Route::get('/register', function () {
-	return view('pages.company.register');
+    return view('pages.company.register');
 })->name('register.form');
 
 // Terima form register (sederhana)
 Route::post('/register', function (Request $request) {
-	$rules = [
-		'name' => 'required|string|max:255',
-		'email' => 'required|email|max:255',
-		'phone' => 'required|string|max:50',
-		'password' => 'required|confirmed|min:6',
-		'province_id' => 'required',
-		'city_id' => 'required',
-		'district_id' => 'required',
-		'sub_district_id' => 'required',
-		'postal_code' => 'required',
-		'address' => 'required',
-	];
+    $rules = [
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'phone' => 'required|string|max:50',
+        'password' => 'required|confirmed|min:6',
+        'province_id' => 'required',
+        'city_id' => 'required',
+        'district_id' => 'required',
+        'sub_district_id' => 'required',
+        'postal_code' => 'required',
+        'address' => 'required',
+    ];
 
-	$validator = Validator::make($request->all(), $rules);
+    $validator = Validator::make($request->all(), $rules);
 
-	if ($validator->fails()) {
-		return redirect('/register')->withErrors($validator)->withInput();
-	}
+    if ($validator->fails()) {
+        return redirect('/register')->withErrors($validator)->withInput();
+    }
 
-	// TODO: simpan data user/ perusahaan sesuai kebutuhan aplikasi
-	// Untuk sementara redirect kembali dengan pesan sukses
-	return redirect('/register')->with('status', 'Registrasi berhasil (demo).');
+    // TODO: simpan data user/ perusahaan sesuai kebutuhan aplikasi
+    // Untuk sementara redirect kembali dengan pesan sukses
+    return redirect('/register')->with('status', 'Registrasi berhasil (demo).');
 })->name('company.register');
-=======
->>>>>>> 566bf0651e64fca396a13e6e51f6e9d4cb5f71e5
->>>>>>> f31128ff21feb98c473ead67e73a0f75923fc650
